@@ -1,0 +1,116 @@
+.resume-salary {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 22px;
+    color: #949494;
+    margin-bottom: 13px;
+}
+
+.resume-salary img,
+.resume-location img {
+    margin-right: 7px;
+}
+
+.resume-location {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 22px;
+    color: #494949;
+    margin-bottom: 26px;
+}
+
+.muted {
+    font-size: 17px;
+    line-height: 19px;
+    color: #989898;
+}
+
+
+.experience {
+    display: flex;
+    flex-direction: column;
+}
+
+.date {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.date-time {
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 26px;
+    color: #565656;
+    max-width: 232px;
+    margin-bottom: 10px;
+}
+
+.company-name,
+.position {
+    display:inline-block; 
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 22px;
+    color: #494949;
+    margin-bottom: 10px;
+}
+
+.work-description {
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 22px;
+}
+
+.delimeter {
+    height: 2px;
+    max-width: 519px;
+    border-radius: 5px;
+    background: #E7E7E7;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.skills {
+    display: flex;
+    margin-bottom: 50px;
+    margin-top: 32px;
+    flex-wrap: wrap;
+}
+
+.skill {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #EBEBEB;
+    border-radius: 8px;
+
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 22px;
+    color: #494949;
+
+    padding-top: 13px;
+    padding-bottom: 13px;
+    padding-right: 40px;
+    padding-left: 40px;
+    margin-right: 10px;
+}
+
+.skill:last-child {
+    margin-right: 0;
+}
+
+@media (max-width: 1100px) {
+    .company-profile-container {
+        flex-direction: column;
+    }
+    .skill {
+        margin-top: 10px;
+    }
+}

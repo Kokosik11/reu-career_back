@@ -1,0 +1,23 @@
+ <link rel="stylesheet" href="/css/style.css">
+
+
+<section class="login">
+    <form action="/signup" method="post" class="login-box">
+        <h2>Регистрация</h2>
+
+        {{#if err}}
+        <div class="error-handler">{{ err }}</div>
+        {{/if}}
+
+        <input type="email" name="email" placeholder="Ваш e-mail">
+        <input type="text" name="firstname" placeholder="Ваше имя">
+        <input type="password" name="password" id="" placeholder="Ваш пароль">
+        <input type="password" name="repeatpass" id="" placeholder="Повторите пароль">
+        <button class="btn" type="submit">Зарегистрироваться</button>
+        <span id="reg-span">Уже зарегистрированы?</span>
+        <div class="btn-sumbit">
+            <a href="/login" class="btn outline">Войти</a>
+        </div>
+        <a href="/"><img src="/media/logo.svg" alt="icon: logo"></a>
+    </form>
+</section>

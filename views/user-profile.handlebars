@@ -1,0 +1,63 @@
+<link rel="stylesheet" href="css/profile.css">
+<link rel="stylesheet" href="css/add-form.css">
+
+<div class="content-header">
+    <h1>Мой профиль</h1>
+</div>
+
+<div class="form-section profile">
+    <div class="tab-main">
+        <form class="tab-main_content active" action="/user/update" method="post" >
+            <div class="first-column">
+                <span class="span">Фамилия *</span>
+                <input type="text" name="lastname" id="lastname" placeholder="Иванов" value="{{user.username.lastname}}">
+                <span class="span">Имя *</span>
+                <input type="text" name="firstname" id="firstname" placeholder="Иван" value="{{user.username.firstname}}">
+                <span class="span">Отчество *</span>
+                <input type="text" name="patronymic" id="patronymic" placeholder="Иванович" value="{{user.username.patronymic}}">
+            </div>
+            <div class="second-column">
+                <span class="span">Email</span>
+                <input type="text" name="email" id="email" placeholder="example@gmail.com" value="{{user.email}}">
+                <span class="span">Телефон *</span>
+                <input type="text" name="phone" id="phone" placeholder="+375 29 765 48 56" value="{{user.phone}}">
+                <span class="span">.</span>
+                <button type="submit" class="next"><span>Сохранить</span></button>
+            </div>
+            {{#if user.avatar}}
+            <img src="/media/avatar-big.png" alt="">
+            {{else}}
+            <img src="/media/avatar.png" alt="">
+            {{/if}}
+        </form>
+    </div>
+</div>
+
+<div class="resumes">
+    <h2>Мои резюме</h2>
+        <div class="cards-container">
+
+            <div class="card-resume add-new">
+                <h3 class="card-resume-title">...</h3>
+                <div class="avatar-info">
+                    <img src="/media/default.png" alt="img: avatar">
+                    <span class="span-add-new">
+                        Антон
+                        34 года
+                    </span>
+                </div>
+                <span class="card-resume-phone">+375001112233</span>
+                <span class="card-resume-mail">example@mail.com</span>
+                <div class="card-resume-checkbox">
+                    <div class="input-filter mt-ios" style="font-size: 6px;">
+                        <input id="3" type="checkbox" style="background: none;">
+                        <label for="3"></label>
+                        <span>Доступность резюме</span>
+                    </div>
+                </div>
+                <a href="/resume/add" class="card-resume-button add-new">Добавить новое</a>
+            </div>
+        </div>
+</div>
+
+<script src="/js/resumes.js"></script>

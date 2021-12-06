@@ -1,0 +1,28 @@
+<div class="content-header">
+    <h1>Все компании</h1>
+</div>
+
+<div class="container">
+    <div class="card-wrapper companies">
+        {{#if companies}}
+        {{#each companies}}
+            <div class="card">
+                <div class="card-heading">
+                    <h2>{{this.name}}</h2>
+                    <img style="width:70%" src="{{this.logoURL}}" id="location" alt="Company logo">
+                </div>
+                <a href="/company/{{this._id}}">Посмотреть...</a>
+            </div>
+        {{/each}}
+        {{else}}
+            <h3>Список компаний пуст...</h3>
+        {{/if}}
+    </div>
+</div>
+<div class="button-container">
+    <button class="more">
+        Загрузить еще
+    </button>
+</div>
+
+<script src="/js/vacancies.js"></script>

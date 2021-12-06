@@ -1,0 +1,126 @@
+.company-profile-container {
+    display: flex;
+    max-width: 1340px;
+    padding-right: 20px;
+    padding-left: 20px;
+    margin: 0 auto;
+    margin-top: 52px;
+    justify-content: space-between;
+}
+
+.company-profile-container aside {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    width: 100%;
+}
+
+.company-profile-container aside span {
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 22px;
+    color: #434343;
+    margin-bottom: 13px;
+}
+
+.company-profile-container aside span a {
+    display: block;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 22px;    
+    color: #687EFF;
+    text-decoration: none;
+    margin-bottom: 30px;
+}
+
+.company-profile-container aside p {
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 22px;
+    color: #7A7A7A;
+    margin-top: 0;
+    max-width: 270px;
+}
+
+.company-profile-button {
+    padding-top: 11px;
+    padding-bottom: 11px;
+
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 18px;
+    color: #494949;
+    margin-bottom: 13px;
+    padding-right: 50px;
+    padding-left: 50px;
+}
+
+.company-block {
+    max-width: 900px;
+    width: 100%;
+}
+
+.company-profile-container aside img {
+    max-width: 50%;
+    margin-bottom: 50px;
+}
+
+.company-title {
+    display: flex;
+    align-items: center;
+}
+
+.company-title img {
+    max-width: 100%;
+    margin-left: 13px;
+}
+
+.company-title h2 {
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 33px;
+    color: #434343;
+}
+
+.vacancy-title {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.vacancy-salary,
+.vacancy-location {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.vacancy-salary span {
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 22px;
+    color: #949494;    
+}
+
+.vacancy-location span {
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 22px; 
+    color: #494949;
+}
+
+.vacancy-salary img,
+.vacancy-location img {
+    margin-right: 7px;
+    margin-left: 0;
+}
+
+.vacancy-detail {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+}
+
+.vacancy-detail span {
+    margin-bottom: 11px;
+}

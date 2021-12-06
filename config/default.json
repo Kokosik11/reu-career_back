@@ -1,0 +1,20 @@
+{
+    "db": {
+        "host": "localhost",
+        "port": 27017,
+        "database": "reu-career",
+        "maxAge": "60 * 60 * 1000",
+        "sessionSchema": "session",
+        "sessionHistorySchema": "session-history"
+    },
+    "secret": "secret",
+
+    "PORT": 3000,
+    "MODE": "development",
+
+    "email": {
+        "USERNAME": "lomjector98@gmail.com",
+        "PASSWORD": "asueuhxfxhmymqjy",
+        "SENDHOST": "http://10.21.10.168:3000/"
+    }
+}

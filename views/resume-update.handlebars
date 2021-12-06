@@ -1,0 +1,94 @@
+<link rel="stylesheet" href="/css/add-resume.css">
+<link rel="stylesheet" href="/css/add-form.css">
+
+<div class="content-header">
+    <h1>Создание резюме</h1>
+    <span>Чем больше заполнено резюме, тем выше шанс, что выберут именно вас!</span>
+</div>
+
+<div class="form-section">
+    <div class="tab">
+        <div class="tab-content active">
+            <span>1. Личные данные</span>
+        </div>
+        <div class="tab-content">
+            <span>2. Контактные данные</span>
+        </div>
+        <div class="tab-content">
+            <span>3. Рабочие данные</span>
+        </div>
+    </div>
+    <form action="/resume/{{resume._id}}/update" method="post" class="tab-main">
+        <div class="tab-main_content active">
+            <div class="first-column">
+                <span class="span">Фамилия *</span>
+                <input id="lastname" name="lastname" type="text" placeholder="Иванов" value="{{resume.lastname}}">
+                <span class="span">Имя *</span>
+                <input id="firstname" name="firstname" type="text" placeholder="Иван" value="{{resume.firstname}}">
+                <span class="span">Отчество *</span>
+                <input id="patronymic" name="patronymic" type="text" placeholder="Иванович" value="{{resume.patronymic}}">
+                <button class="next"><span>Продолжить</span></button>
+            </div>
+            <div class="second-column">
+                <span class="span">Пол</span>
+                <input type="text" id="sex" name="sex" value="{{resume.sex}}">
+                <span class="span">Дата рождения *</span>
+                <input type="text" id="birthdate" name="birthdate" placeholder="17.06.1987" value="{{resume.birthdate}}">
+                <span class="span">Гражданство *</span>
+                <input type="text" id="citizenship" name="citizenship" value="{{resume.citizenship}}">
+            </div>
+        </div>
+        
+        <div class="tab-main_content">
+            <div class="first-column">
+                <span class="span">Email *</span>
+                <input type="text" id="email" name="email" placeholder="example@gmail.com" value="{{resume.email}}">
+                <span class="span">Телефон *</span>
+                <input type="text" id="phone" name="phone" placeholder="+375 29 545 87 54" value="{{resume.phone}}">
+                <span class="span">Страна *</span>
+                <input type="text" id="country" name="country" placeholder="Беларусь" value="{{resume.country}}">
+                <button class="next"><span>Продолжить</span></button>
+            </div>
+            <div class="second-column">
+                <span class="span">Город *</span>
+                <input type="text" id="city" name="city" placeholder="г. Минск" value="{{resume.city}}">
+                <span class="span">Адрес *</span>
+                <input type="text" id="address" name="address" placeholder="ул. Бяды 67-54" value="{{resume.address}}">
+                <span class="span">Социальные сети *</span>
+                <div class="social-block">
+                    <img src="./media/vk.svg" alt="icon: Vk">
+                    <img src="./media/linkedin.svg" alt="icon: LinkedIn">
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-main_content">
+            <div class="first-column">
+                <span class="span">Желаемая должность *</span>
+                <input type="text" id="careerObjective" name="careerObjective" placeholder="Повар" value="{{resume.careerObjective}}">
+                <span class="span">Желаемая ЗП</span>
+                <input type="text" id="salaryObjective" name="salaryObjective" placeholder="1500 BYN" value="{{resume.salaryObjective}}">
+                <span class="span">Занятость *</span>
+                <input type="text" id="busyness" name="busyness"placeholder="Полная" value="{{resume.busyness}}">
+                <button type="submit" class="submit"><span>Отправить</span></button>
+            </div>
+            <div class="second-column">
+                <span class="span">Опыт работы</span>
+                <input type="text" id="workExpirience" name="workExpirience" value="{{resume.workExpirience}}">
+                <span class="span">Образование</span>
+                <input type="text" id="education" name="education" value="{{resume.education}}">
+                <span class="span">Языки</span>
+                <input type="text" id="languages" name="languages" value="{{resume.languages}}">
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="content-header cta">
+    <h1>Найдите вашу работу мечты!</h1>
+    <button>
+        <a href="#">Смотреть вакансии</a>
+    </button>
+</div>
+
+<script src="/js/tab.js"></script>

@@ -1,0 +1,30 @@
+{
+  "name": "reu-career",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "config": "^3.3.6",
+    "connect-mongo": "^4.6.0",
+    "crypto": "^1.0.1",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.3.4",
+    "express-session": "^1.17.2",
+    "hbs": "^4.1.2",
+    "mongoose": "^6.0.8",
+    "mongoose-guid": "^2.0.1",
+    "multer": "^1.4.3",
+    "nodemailer": "^6.6.5",
+    "nodemon": "^2.0.13",
+    "passport": "^0.5.0",
+    "passport-local": "^1.0.0"
+  }
+}

@@ -1,0 +1,93 @@
+<link rel="stylesheet" href="/css/mainpage.css">
+<link rel="stylesheet" href="/css/add-form.css">
+<link rel="stylesheet" href="/css/profile.css">
+<link rel="stylesheet" href="/css/company-profile.css">
+<link rel="stylesheet" href="/css/resume.css">
+
+<div class="content-header">
+    <h1>Резюме</h1>
+    <span>{{ resume.firstname }} {{ resume.lastname }}</span>
+</div>
+
+<div class="company-profile-container">
+    <aside>
+        <img src="/media/resume-detail-avatar.png" alt="" style="height: 110px; width: 110px;">
+        <span>{{ resume.firstname }} {{ resume.lastname }}</span>
+        <span><a href="#">19 лет, 28.08.2001</a></span>
+        <span>Контакты</span>
+        <span><a href="#" style="margin-bottom: 0px;">{{ resume.phone }}</a></span>
+        <span><a href="#" style="margin-bottom: 0px;">{{ resume.email }}</a></span>
+        <div class="resume-social">
+            <img src="/media/vk.svg" alt="">
+            <img src="/media/linkedin.svg" alt="">
+        </div>
+        <span>Навыки</span>
+        <p>
+            Python, Django, SQL,
+            Git, Docker, Figma, UI & UX,
+            HTML, CSS, MongoDB            
+        </p>
+        {{#if isAuth }}
+            {{#if user.companyIsConfirmed }}
+                <button class="card-resume-button company-profile-button">Написать</button>
+            {{/if}}
+        {{/if }}
+    </aside>
+    <div class="company-block">
+        <div class="company-title">
+            <h2>{{ resume.careerObjective }}</h2>
+        </div>
+        <div class="resume-salary">
+            <img src="/media/swap-big.svg" alt="">
+            <span>от ${{ resume.salaryObjective }}</span>
+        </div>
+        <div class="resume-location">
+            <img src="/media/location-big.svg" alt="">
+            <span>{{ resume.city }}, {{ resume.country }}</span>
+        </div>
+        <span class="muted">{{ resume.busyness }}</span>
+        <div class="experience">
+            <h2>Опыт работы {{ resume.workExpirience }}</h2>
+            <div class="experience-block">
+                <div class="date">
+                    <span class="date-time">
+                        Сентябрь 2021 - 
+                        по настоящее время
+                    </span>
+                    <span class="muted">
+                        3 месяца
+                    </span>
+                </div>
+                <span class="company-name">Epam Systems, Inc.</span><br>
+                <span class="position">Python Engineer</span><br>
+                <span class="work-description muted">Developing web-applications</span>
+            </div>
+            <img src="/media/epam-big.png" alt="photo: logo" style="max-width: 110px; margin-top: 15px;">
+            <div class="delimeter"></div>
+            <div class="experience-block">
+                <div class="date">
+                    <span class="date-time">
+                        Сентябрь 2020 - 
+                        Сентябрь 2021
+                    </span>
+                    <span class="muted">
+                        8 месяцев
+                    </span>
+                </div>
+                <span class="company-name">ITechArt Group</span><br>
+                <span class="position">UX Designer</span><br>
+                <span class="work-description muted">Design and prototyping</span>
+            </div>
+            <img src="/media/itechart.png" alt="photo: logo" style="max-width: 110px; margin-top: 15px;">
+            <div class="delimeter"></div>
+        </div>
+        <h2>Ключевые навыки</h2>
+        <div class="skills">
+            <div class="skill">Python</div>
+            <div class="skill">PostgreSQL</div>
+            <div class="skill">JavaScript</div>
+            <div class="skill">Docker</div>
+        </div>
+        <span class="muted">Дата публикации резюме: 18 ноября 2021</span>
+    </div>
+</div>

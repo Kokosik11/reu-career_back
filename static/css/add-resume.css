@@ -1,0 +1,8 @@
+.social-block img {
+    cursor: pointer;
+    transition: 0.5s ease;
+}
+
+.social-block img:hover {
+    transform: rotate(360deg);
+}

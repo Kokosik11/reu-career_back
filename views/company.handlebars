@@ -1,0 +1,40 @@
+<link rel="stylesheet" href="/css/mainpage.css">
+<link rel="stylesheet" href="/css/add-form.css">
+<link rel="stylesheet" href="/css/profile.css">
+<link rel="stylesheet" href="/css/company-profile.css">
+
+<div class="content-header">
+    <h1>{{ company.name }}</h1>
+    <span>Профиль компании</span>
+</div>
+
+
+<div class="company-profile-container">
+    <aside>
+        <img src="{{ company.logoURL }}" alt="">
+        <span>{{ company.address }}</span>
+        <span><a href="#">{{ company.email }}</a></span>
+        <span>Вакансии</span>
+        <span><a href="#">0 активных вакансий</a></span>
+        <span>Сферы деятельности</span>
+        <p>
+            Информационные 
+            технологии, системная 
+            интеграция, интернет                
+        </p>
+        {{#if isCreator }}
+        {{else}}
+        <button class="card-resume-button company-profile-button">Подписаться</button>
+        <button class="card-resume-button company-profile-button">Хочу тут работать</button>
+        {{/if}}
+    </aside>
+    <div class="company-block">
+        <div class="company-title">
+            <h2>{{ company.name }}</h2>
+            <img src="./media/galochka.svg" alt="">
+        </div>
+        <p>
+            {{{company.content}}} 
+        </p>
+    </div>
+</div>

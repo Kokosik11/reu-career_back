@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="/css/mainpage.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JNKKKK/MoreToggles.css@0.2.1/output/moretoggles.min.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+    <script src="/js/jquery-3.6.0.min.js"></script>
+
+    <title>REU Career</title>
+  </head>
+  <body>
+    {{#if isNotLogin}}
+    <header class="header">
+        <div class="header-body">
+            <ul class="header-body-menu">
+                <li class="header-body-menu-item">
+                    <a href="/">
+                        <img src="/media/header-logo.svg" alt="svg: logo">
+                    </a>
+                </li>
+            </ul>
+            <ul class="header-body-menu">
+                <li class="header-body-menu-item" id="center-link">
+                    <a href="">Ищу работу</a>
+                    <img src="/media/arrow-down.svg" alt="icon: arrow down">
+                    <ul class="header-body-sub-menu">
+                        <li>
+                            <a href="" class="sub-menu-link active">Добавить резюме</a>
+                        </li>
+                        <li>
+                            <a href="/" class="sub-menu-link">Вакансии</a>
+                        </li>
+                        <li>
+                            <a href="/company" class="sub-menu-link">Компании</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="header-body-menu-item" id="center-link">
+                    <a href="">Ищу людей</a>
+                    <img src="/media/arrow-down.svg" alt="icon: arrow down">
+                    <ul class="header-body-sub-menu">
+                        <li>
+                            {{#if user.company}}<a href="/company/me" class="sub-menu-link active">Моя компания</a>
+                            {{else}}<a href="/company/create" class="sub-menu-link active">Добавить компанию</a>{{/if}}
+                        </li>
+                        <li>
+                            <a href="/resume" class="sub-menu-link">Люди</a>
+                        </li>
+                    </ul>
+                </li>
+                {{#if isAuth }}
+                <li class="header-body-menu-item" id="center-link">
+                    <a href="/logout">Выход, {{ user.username.firstname }}</a>
+                </li>
+                {{else}}
+                <li class="header-body-menu-item" id="center-link">
+                    <a href="/login">Регистрация / Вход</a>
+                </li>
+                {{/if}}
+            </ul>
+            <ul class="header-body-menu">
+                {{#if isAuth }}
+                <li class="header-body-menu-item">
+                    <div class="header-bg elem">
+                        <img src="/media/notification.svg" alt="icon: notification">
+                    </div>
+                </li>
+                {{/if}}
+
+                <li class="header-body-menu-item">
+                    <form class="header-bg">
+                        <img src="/media/search.svg" alt="icon: search">
+                    </form>
+                </li>
+                
+                {{#if isAuth }}
+                <li class="header-body-menu-item">
+                    <a href="/user" class="header-bg avatar">
+                        {{#if user.avatar}}
+                        avatar
+                        {{else}}
+                        <img src="/media/avatar.png" alt="img: avatar">
+                        {{/if}}
+                    </a>
+                </li>
+                {{/if}}
+            </ul>
+        </div>
+        <div class="container-second">
+            <!-- This checkbox will give us the toggle behavior, it will be hidden, but functional -->
+            <input id="toggle" type="checkbox">
+        
+            <!-- IMPORTANT: Any element that we want to modify when the checkbox state changes go here, being "sibling" of the checkbox element -->
+        
+            <!-- This label is tied to the checkbox, and it will contain the toggle "buttons" -->
+            <label class="toggle-container" for="toggle">
+                <!-- If menu is open, it will be the "X" icon, otherwise just a clickable area behind the hamburger menu icon -->
+                <span class="button button-toggle"></span>
+            </label>
+        
+            <!-- The nav menu -->
+            <nav class="nav">
+                {{#if isAuth}}
+                <div class="nav-item gray">Привет, {{ user.username.firstname }}</div>
+                {{/if}}
+                <a class="nav-item" href="/">Ищу работу</a>
+                <a class="nav-item" href="/resume">Ищу людей</a>
+                {{#if isAuth }}
+                <a class="nav-item" href="/logout">Выход</a>
+                {{else}}
+                <a class="nav-item" href="/signup">Регистрация</a>
+                <a class="nav-item" href="/login">Вход</a>
+                {{/if}}
+                <a href="/" class="nav-item">
+                    <img src="/media/header-logo.svg" alt="svg: logo">
+                </a>
+            </nav>
+        </div>
+    {{/if}}
+
+    <main>
+      {{{body}}}
+    </main>
+
+    {{#if isNotLogin}}
+    <footer class="footer">
+        <div class="footer-content">
+            <ul class="footer-menu log">
+                <div class="logos">
+                    <li class="foter-menu-item">
+                        <a href="#">
+                            <img src="/media/footer-logo.svg" alt="logo: reu-career">
+                        </a>
+                    </li>
+                    <li class="foter-menu-item">
+                        <a href="#">
+                            <img src="/media/reu.svg" alt="logo: reu">
+                        </a>
+                    </li>
+                </div>
+                <li class="footer-info">
+                    2021 Лаборатория
+                    Грфического дизайна
+                    и web-проетирования
+                    РЭУ Им. Плеханова
+                </li>
+            </ul>
+            <ul class="footer-menu">
+                <li class="foter-menu-item">
+                    <a href="#" id="footer-item-title">Контакты</a>
+                </li>
+                <li class="foter-menu-item">
+                    <a href="tel:+375298473765">+375298473765</a>
+                </li>
+                <li class="foter-menu-item">
+                    <a href="mailto:career@reu.by">career@reu.by</a>
+                </li>
+                <li class="foter-menu-item">
+                    <a href="#">
+                        Радиальная 40/1
+                    </a>
+                </li>
+            </ul>
+            <ul class="footer-menu">
+                <li class="foter-menu-item">
+                    <a href="#" id="footer-item-title">Правила</a>
+                </li>
+                <li class="foter-menu-item">
+                    <a href="#">Договор</a>
+                </li>
+                <li class="foter-menu-item">
+                    <a href="#">Общее положение</a>
+                </li>
+                <li class="foter-menu-item">
+                    <a href="#">Правила размещения</a>
+                </li>
+            </ul>
+            <ul class="footer-menu">
+                <li class="foter-menu-item">
+                    <a href="#" id="footer-item-title">Другое</a>
+                </li>
+                <li class="foter-menu-item">
+                    <a href="#">Партнеры</a>
+                </li>
+                <li class="foter-menu-item">
+                    <a href="#">Партнеры</a>
+                </li>
+            </ul>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2021 РЭУ им. Плеханова | Cделано <a href="https://lab.reu.by/" target="_blank">Лабораторией</a> с <i class="fas fa-heart"></i></span>
+        </div>
+    </footer>
+    {{/if}}
+    
+  </body>
+</html>
