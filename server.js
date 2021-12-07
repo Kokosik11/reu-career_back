@@ -6,6 +6,7 @@ const MongoStore = require('connect-mongo');
 const handlebars = require('express-handlebars');
 const path = require('path');
 const chalk = require('chalk');
+const env = require('dotenv');
 
 require('./config/db');
 
@@ -14,7 +15,7 @@ const app = express();
 require("./authenticate")
 
 
-const isProduction = config.MODE === "production";
+const isProduction = process.env.MODE === "production";
 
 app.use(session({
     secret: config.secret,
