@@ -21,7 +21,7 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
     store: MongoStore.create({
-        mongoUrl: `mongodb://${config.db.host}:${config.db.port}/${config.db.database}`
+        mongoUrl: config.db.host
     }),
     cookie: {
         path: '/',

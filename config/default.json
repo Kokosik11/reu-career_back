@@ -1,6 +1,6 @@
 {
     "db": {
-        "host": "localhost",
+        "host": "mongodb+srv://reuadmin:adminadmin@cluster0.kd8no.mongodb.net/reu-career?retryWrites=true&w=majority",
         "port": 27017,
         "database": "reu-career",
         "maxAge": "60 * 60 * 1000",
