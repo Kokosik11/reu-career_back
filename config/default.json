@@ -15,6 +15,6 @@
     "email": {
         "USERNAME": "lomjector98@gmail.com",
         "PASSWORD": "asueuhxfxhmymqjy",
-        "SENDHOST": "http://10.21.10.168:3000/"
+        "SENDHOST": "https://reu-career.herokuapp.com/"
     }
 }
