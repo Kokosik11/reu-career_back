@@ -45,7 +45,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'static')))
 
-const PORT = config.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 
 const serverLog = (req, res, next) => {
     if(!isProduction) {
