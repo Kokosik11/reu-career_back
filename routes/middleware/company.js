@@ -11,4 +11,11 @@ const company = (req, res, next) => {
         })
 }
 
-module.exports = company;
+const isYourCompany = (req, res, next) => {
+    Company.find({ _userId: req.user._id }).then((company) => {
+        if(company.length) return res.redirect("/company/me");
+        return next();
+    })
+}
+
+module.exports = { company, isYourCompany };

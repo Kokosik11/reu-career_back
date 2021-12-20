@@ -101,7 +101,9 @@ module.exports.login = (req, res, next) => {
         }
         req.logIn(user, err => {
             if(err) return next(err);
-            res.redirect('/');
+            res.redirect(req.session.returnTo || '/');
+            delete req.session.returnTo;
+            // return next();
         });
     })(req, res, next);
 }
@@ -130,7 +132,7 @@ module.exports.logout = (req, res) => {
         if(err) throw err;
     })
 
-    return res.redirect('/');
+    return res.redirect(req.session.returnTo || '/');
 }
 
 module.exports.me = (req, res, next) => {
