@@ -1,5 +1,7 @@
 const Company = require('../models/Company.model');
 const User = require('../models/User.model');
+const Subscribe = require('../models/Subscribe.model')
+const subscribe = require('../services/subscribe')
 
 const getAllFunc = () => {
     return Company.find({})
@@ -110,20 +112,25 @@ module.exports.companies = (req, res) => {
     }).lean()
 }
 
-module.exports.getCompany = (req, res) => {
+module.exports.getCompany = async (req, res) => {
 const companyId = req.params.id;
     Company.findById(companyId)
-        .then(company => {
+        .then(async company => {
             if(req.isAuthenticated()) {
-                console.log(company._userId.equals(req.user._id))
-
-                return res.render('company', { 
+                // console.log(company._userId.equals(req.user._id))
+                let options = { 
                     isAuth: true, 
                     isNotLogin: true, 
                     user: req.user.toJSON(),
                     company: company.toJSON(),
                     isCreator: company._userId.equals(req.user._id)
-                });
+                }
+
+                options.status = await subscribe.isSubscribed(req.user._id, req.params.id)
+
+                console.log(options);
+
+                return res.render('company', options);
             }
 
             return res.render('company', { 
@@ -145,22 +152,7 @@ module.exports.getMyCompany = (req, res) => {
     .then(user => {
         Company.findById(req.user.company)
             .then(company => {
-                if(company.isConfirmed) {
-                    return res.render('company', { 
-                        isAuth: true, 
-                        isNotLogin: true, 
-                        user: user.toJSON(),
-                        company: company.toJSON()
-                    });
-                } else {
-                    return res.render('success-comp', { 
-                        isAuth: true, 
-                        isNotLogin: true, 
-                        user: user.toJSON(),
-                        company: company.toJSON()
-                    });
-                }
-                
+                res.redirect('/company/'+company._id);            
             })
     }) 
 }

@@ -23,9 +23,13 @@
             интеграция, интернет                
         </p>
         {{#if isCreator }}
+        <a href="" class="card-resume-button company-profile-button">Редактировать</a>
         {{else}}
-        <button class="card-resume-button company-profile-button">Подписаться</button>
-        <button class="card-resume-button company-profile-button">Хочу тут работать</button>
+        {{#if status.length }}
+        <a disabled class="card-resume-button company-profile-button">Вы подписаны</a>
+        {{else}}
+        <a href="/user/subscribe/{{ company._id }}" class="card-resume-button company-profile-button">Подписаться</a>
+        {{/if}}
         {{/if}}
     </aside>
     <div class="company-block">
