@@ -59,6 +59,7 @@ const serverLog = (req, res, next) => {
     next();
 }
 
+app.use("/notifications", serverLog, require("./routes/notifications.router"));
 app.use("/resume", serverLog, require("./routes/resume.router.js"));
 app.use("/company", serverLog, require("./routes/company.router.js"));
 app.use("/user", serverLog, require("./routes/user.router.js"));

@@ -3,6 +3,8 @@
 <link rel="stylesheet" href="/css/profile.css">
 <link rel="stylesheet" href="/css/company-profile.css">
 
+{{#if company}}
+
 <div class="content-header">
     <h1>{{ company.name }}</h1>
     <span>Профиль компании</span>
@@ -26,7 +28,7 @@
         <a href="" class="card-resume-button company-profile-button">Редактировать</a>
         {{else}}
         {{#if status.length }}
-        <a disabled class="card-resume-button company-profile-button">Вы подписаны</a>
+        <a href="/user/unsubscribe/{{ company._id }}" class="card-resume-button company-profile-button">Отписаться</a>
         {{else}}
         <a href="/user/subscribe/{{ company._id }}" class="card-resume-button company-profile-button">Подписаться</a>
         {{/if}}
@@ -42,3 +44,6 @@
         </p>
     </div>
 </div>
+{{else}}
+<h2>Компания не найдена</h2>
+{{/if}}

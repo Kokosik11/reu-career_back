@@ -128,7 +128,7 @@ const companyId = req.params.id;
 
                 options.status = await subscribe.isSubscribed(req.user._id, req.params.id)
 
-                console.log(options);
+                // console.log(options);
 
                 return res.render('company', options);
             }

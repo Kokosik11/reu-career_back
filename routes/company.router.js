@@ -7,7 +7,18 @@ const Controller = require('../controllers/company.controller')
 const auth = require('./middleware/auth.js')
 const company = require('./middleware/company.js')
 
-const upload = multer({dest:"static/uploads/company"});
+const path = require('path');
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "static/uploads/company")
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + path.extname(file.originalname)) //Appending extension
+  }
+})
+
+const upload = multer({ storage });
 
 Router.get('/success', auth, Controller.success);
 Router.post('/create', upload.single("company-logo"), auth, Controller.create);

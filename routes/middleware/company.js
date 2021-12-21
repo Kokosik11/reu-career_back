@@ -3,6 +3,7 @@ const Company = require('../../models/Company.model');
 const company = (req, res, next) => {
     Company.findById(req.params.id)
         .then((company) => {
+            if(!company) return res.redirect("/");
             if (company.isConfirmed) {
                 return next()
             }

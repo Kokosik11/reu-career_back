@@ -37,7 +37,17 @@ module.exports.subscribeToCompany = (req, res) => {
             return console.error(err);
         } 
         if(status) {
-            console.log("hi")
+            return res.redirect('/company/'+req.params.id);
+        } 
+    });
+} 
+
+module.exports.unsubscribe = (req, res) => {
+    subscribe.unsubscribe(req.user._id, req.params.id, (err, status) => {
+        if(err) {
+            return console.error(err);
+        } 
+        if(status) {
             return res.redirect('/company/'+req.params.id);
         } 
     });

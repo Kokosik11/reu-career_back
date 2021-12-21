@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+const Notification = require('./Notification.model');
+
 const Schema = mongoose.Schema;
 
 const Company = new Schema({
@@ -12,6 +14,7 @@ const Company = new Schema({
     phone: { type: String, required: true },
     addPhone: { type: String, default: ''},
     logoURL: { type: String, default: '' },
+    notifications: { type: [Notification], default: [] }
 });
 
 module.exports = mongoose.model('Company', Company);

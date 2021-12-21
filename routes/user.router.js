@@ -7,6 +7,7 @@ const auth = require('./middleware/auth.js')
 
 const upload = multer({dest:"static/uploads/company"});
 
+Router.get('/unsubscribe/:id', auth, Controller.unsubscribe);
 Router.get('/subscribe/:id', auth, Controller.subscribeToCompany);
 Router.post('/update', auth, Controller.updateProfile);
 Router.get('/', auth, Controller.profile);
