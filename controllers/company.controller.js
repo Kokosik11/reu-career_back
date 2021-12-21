@@ -113,11 +113,10 @@ module.exports.companies = (req, res) => {
 }
 
 module.exports.getCompany = async (req, res) => {
-const companyId = req.params.id;
+    const companyId = req.params.id;
     Company.findById(companyId)
         .then(async company => {
             if(req.isAuthenticated()) {
-                // console.log(company._userId.equals(req.user._id))
                 let options = { 
                     isAuth: true, 
                     isNotLogin: true, 
@@ -127,8 +126,6 @@ const companyId = req.params.id;
                 }
 
                 options.status = await subscribe.isSubscribed(req.user._id, req.params.id)
-
-                // console.log(options);
 
                 return res.render('company', options);
             }
