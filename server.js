@@ -4,6 +4,7 @@ const passport = require('passport');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const handlebars = require('express-handlebars');
+const csrf = require('csurf')
 const path = require('path');
 const chalk = require('chalk');
 const env = require('dotenv');
@@ -39,8 +40,15 @@ app.engine(
 app.set('views', './views');
 app.set('view engine', 'handlebars');
 
-app.use(express.json());
+const csrfMiddleware = (req, res, next) => {
+    res.locals.csrf = req.csrfToken();
+    next();
+}
+
 app.use(express.urlencoded({ extended: true }));
+app.use(csrf());
+app.use(csrfMiddleware);
+app.use(express.json());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'static')))
@@ -59,12 +67,14 @@ const serverLog = (req, res, next) => {
     next();
 }
 
-app.use("/notifications", serverLog, require("./routes/notifications.router"));
-app.use("/resume", serverLog, require("./routes/resume.router.js"));
-app.use("/company", serverLog, require("./routes/company.router.js"));
-app.use("/user", serverLog, require("./routes/user.router.js"));
-app.use("/vacancy", serverLog, require('./routes/vacancy.router.js'));
-app.use("/", serverLog, require('./routes/home.router.js'));
+app.use(serverLog);
+
+app.use("/notifications", require("./routes/notifications.router"));
+app.use("/resume", require("./routes/resume.router.js"));
+app.use("/company", require("./routes/company.router.js"));
+app.use("/user", require("./routes/user.router.js"));
+app.use("/vacancy", require('./routes/vacancy.router.js'));
+app.use("/", require('./routes/home.router.js'));
 
 app.use((req, res, next) => {
     res.send("<h1>Page not found</h1>");

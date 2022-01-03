@@ -22,6 +22,7 @@
                 <span class="span">Телефон *</span>
                 <input type="text" name="phone" id="phone" placeholder="+375 29 765 48 56" value="{{user.phone}}">
                 <span class="span">.</span>
+                <input type="hidden" name="_csrf" value="{{csrf}}">
                 <button type="submit" class="next"><span>Сохранить</span></button>
             </div>
             {{#if user.avatar}}

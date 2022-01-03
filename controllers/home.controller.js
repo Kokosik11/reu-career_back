@@ -50,7 +50,7 @@ module.exports.signup = (req, res, next) => {
 
                 let transporter = nodemailer.createTransport({ service: 'Gmail', auth: { user: config.email.USERNAME, pass: config.email.PASSWORD } });
                 let mailOptions = { from: 'reu-career@gmail.com', to: user.email, subject: 'Account Verification Link', 
-                text: 'Привет, '+ username.firstname +'!\n\n' + 'Пожалуйста, перейдите по ссылке, чтобы подтвердить почту: \n' + config.email.SENDHOST + 'confirmation\/' + user.email + '\/' + token.token + '\n\nЕсли вы нигде не регестрировались под этим email адресом, проигнорируйте это сообщение \n' };
+                text: 'Привет, '+ username.firstname +'!\n\n' + 'Пожалуйста, перейдите по ссылке, чтобы подтвердить почту: \n' + config.email.SENDHOST + 'confirmation\/' + user.email + '\/' + token.token + '\n\nЕсли вы нигде не регистрировались под этим email адресом, проигнорируйте это сообщение \n' };
                 transporter.sendMail(mailOptions, function (err) {
                     if (err) {
                         console.log(err);
@@ -132,7 +132,7 @@ module.exports.logout = (req, res) => {
         if(err) throw err;
     })
 
-    return res.redirect(req.session.returnTo || '/');
+    return res.redirect('/');
 }
 
 module.exports.me = (req, res, next) => {

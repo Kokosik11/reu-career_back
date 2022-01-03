@@ -15,6 +15,7 @@
         <input type="password" name="repeatpass" id="" placeholder="Повторите пароль">
         <button class="btn" type="submit">Зарегистрироваться</button>
         <span id="reg-span">Уже зарегистрированы?</span>
+        <input type="hidden" name="_csrf" value="{{csrf}}">
         <div class="btn-sumbit">
             <a href="/login" class="btn outline">Войти</a>
         </div>
