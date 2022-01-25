@@ -1,5 +1,6 @@
 const User = require('../models/User.model');
 const Resume = require('../models/Resume.model');
+const notificationService = require("../services/notifications");
 
 module.exports.get = (req, res, next) => {
     Resume.find({ _userId: req.user._id}, (err, resume) => {
@@ -8,15 +9,18 @@ module.exports.get = (req, res, next) => {
         })
 } 
 
-module.exports.add = (req, res, next) => {
+module.exports.add = async (req, res, next) => {
+    let isNotif = await notificationService.notification(req.user._id);
+
     return res.render('resume-create', {
         isAuth: true, 
         isNotLogin: true, 
         user: req.user.toJSON(),
+        isNotif
     })
 }
 
-module.exports.create = (req, res, next) => {
+module.exports.create = async (req, res, next) => {
     if(!req.body.lastname) return res.status(411).json({ "err": "Lastname is required" })
     if(!req.body.firstname) return res.status(411).json({ "err": "Firstname is required" })
     if(!req.body.birthdate) return res.status(411).json({ "err": "Birthdate is required" })
@@ -28,8 +32,11 @@ module.exports.create = (req, res, next) => {
     if(!req.body.address) return res.status(411).json({ "err": "Address is required" })
     if(!req.body.careerObjective) return res.status(411).json({ "err": "Career objective is required" })
     if(!req.body.busyness) return res.status(411).json({ "err": "Busyness is required" })
-    
+
+    const user = await User.findOne({ _id: req.user._id });
+
     let resume = new Resume({
+        avatarURL: user.avatarURL,
         _userId: req.user._id,
         lastname: req.body.lastname,
         firstname: req.body.firstname,
@@ -74,21 +81,27 @@ module.exports.visible = (req, res) => {
 
 module.exports.updateGET = (req, res) => {
     Resume.findById(req.params.id)
-            .then(resume => {
+            .then(async resume => {
+                let isNotif = await notificationService.notification(req.user._id);
+
                 res.render('resume-update', {
                     isAuth: true, 
                     isNotLogin: true, 
                     user: req.user.toJSON(),
-                    resume: resume.toJSON()
+                    resume: resume.toJSON(),
+                    isNotif
                 })
         })
 }
 
 module.exports.update = (req, res, next) => {
     Resume.findById(req.params.id)
-            .then(resume => {
+            .then(async resume => {
                 console.log(resume)
 
+                const user = await User.findOne({ _id: req.user._id });
+
+                resume.avatarURL = user.avatarURL;
                 resume.lastname = req.body.lastname || resume.lastname;
                 resume.firstname = req.body.firstname || resume.firstname;
                 resume.patronymic = req.body.patronymic || resume.patronymic;
@@ -116,12 +129,15 @@ module.exports.update = (req, res, next) => {
 module.exports.all = (req, res) => {
     Resume.find({})
         .lean()
-        .then(resumes => {
+        .then(async resumes => {
+            let isNotif = await notificationService.notification(req.user._id);
+
             res.render('resume-list', {
                 isAuth: req.user && true, 
                 isNotLogin: true, 
-                user: req.user && req.user.toJSON(),
+                user: req.user.toJSON(),
                 resumes: resumes,
+                isNotif
             })
         })
 }
@@ -141,14 +157,17 @@ module.exports.resumeDetails = (req, res) => {
         User.findById(req.user._id)
             .then(user => {
                 Resume.findById(id)
-                    .then(resume => {
-                    return res.render('resume-detail', {
-                        isAuth: true,
-                        isNotLogin: true,
-                        user: user.toJSON(),
-                        resume: resume.toJSON()
-                    });
-                })
+                    .then(async resume => {
+                        let isNotif = await notificationService.notification(req.user._id);
+
+                        return res.render('resume-detail', {
+                            isAuth: true,
+                            isNotLogin: true,
+                            user: user.toJSON(),
+                            resume: resume.toJSON(),
+                            isNotif
+                        });
+                    })
 
             })
     }

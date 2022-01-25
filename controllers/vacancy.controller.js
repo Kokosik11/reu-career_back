@@ -1,4 +1,7 @@
 const Vacancy = require('../models/Vacancy.model');
+const User = require("../models/User.model");
+const Company = require("../models/Company.model");
+const notificationService = require("../services/notifications");
 
 const getAllFunc = () => {
     return Vacancy.find({})
@@ -26,10 +29,36 @@ module.exports.create = (req, res, next) => {
         salary: req.body.salary,
         location: req.body.location,
         busyness: req.body.busyness,
+        company: req.user.company
+
     })
 
     vacancy.save((err, vacancy) => {
         if(err) return res.status(411).json({ "err": err });
         res.status(200).json({ "message": vacancy });
     })
+
+    return res.redirect("/company/me")
+}
+
+module.exports.createPage = (req, res) => {
+    User.findById(req.user._id)
+        .then(user => {
+            if(!user) console.log("User not found")
+            Company.findById(user.company)
+                .then(async company => {
+                    if(!company) return res.status(411).json({ "err": "Company is defined" })
+                    if(company && company.isConfirmed) {
+                        let isNotif = await notificationService.notification(req.user._id);
+                        return res.render('vacancy-create', {
+                            isAuth: true,
+                            isNotLogin: true,
+                            user: user.toJSON(),
+                            company: company.toJSON(),
+                            isNotif
+
+                        })
+                    }
+                })
+        })
 }

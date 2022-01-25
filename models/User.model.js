@@ -19,7 +19,7 @@ const User = new Schema({
         unique: true,
         default: "",
     },
-    avatarURL: { type: String, default: "" },
+    avatarURL: { type: String, default: "/media/default-avatar.png" },
     company: { type: Schema.Types.ObjectId, ref: "Company" },
     companyIsComfirmed: { type: Boolean, default: false },
     role: { type: String },

@@ -8,6 +8,7 @@ const config = require('config');
 const crypto = require('crypto');
 
 const passport = require("passport");
+const notificationService = require("../services/notifications");
 
 module.exports.signup = (req, res, next) => {
     let username = {
@@ -114,12 +115,15 @@ module.exports.main = (req, res) => {
     } else {
         User.findById(req.user._id)
             .then(user => {
-                getAllFunc().then(vacancies => {
+                getAllFunc().then(async vacancies => {
+                    let isNotif = await notificationService.notification(req.user._id);
+
                     return res.render('home', {
                         isAuth: true,
                         isNotLogin: true,
                         user: user.toJSON(),
-                        vacancies: vacancies
+                        vacancies: vacancies,
+                        isNotif
                     });
                 })
 

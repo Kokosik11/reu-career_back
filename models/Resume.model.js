@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 
 const Resume = new Schema({
     _userId: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User' },
+    avatarURL: { type: String, default: "/media/default-avatar.png" },
     lastname: { type: String, required: true },
     firstname: { type: String, required: true },
     patronymic: { type: String },

@@ -1,13 +1,21 @@
 <link rel="stylesheet" href="css/profile.css">
 <link rel="stylesheet" href="css/add-form.css">
 
+<style>
+    .file {
+        border: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+</style>
+
 <div class="content-header">
     <h1>Мой профиль</h1>
 </div>
 
 <div class="form-section profile">
     <div class="tab-main">
-        <form class="tab-main_content active" action="/user/update" method="post" >
+        <form class="tab-main_content active"  action="/user/update" enctype="multipart/form-data" method="post" >
             <div class="first-column">
                 <span class="span">Фамилия *</span>
                 <input type="text" name="lastname" id="lastname" placeholder="Иванов" value="{{user.username.lastname}}">
@@ -21,15 +29,11 @@
                 <input type="text" name="email" id="email" placeholder="example@gmail.com" value="{{user.email}}">
                 <span class="span">Телефон *</span>
                 <input type="text" name="phone" id="phone" placeholder="+375 29 765 48 56" value="{{user.phone}}">
-                <span class="span">.</span>
+                <span class="span">Аватар: <input class="file" name="avatar" id="avatar" type="file"></span>
                 <input type="hidden" name="_csrf" value="{{csrf}}">
                 <button type="submit" class="next"><span>Сохранить</span></button>
             </div>
-            {{#if user.avatar}}
-            <img src="/media/avatar-big.png" alt="">
-            {{else}}
-            <img src="/media/avatar.png" alt="">
-            {{/if}}
+            <img src="{{user.avatarURL}}" alt="img: avatar">
         </form>
     </div>
 </div>

@@ -1,1 +1,37 @@
-<h2>Уведомления</h2>
+<style>
+    .notification-content {
+        padding: 50px 100px;
+        min-height: 300px;
+    }
+    
+    .notification-content h2 {
+        text-align: center;
+    }
+
+    .notification-message {
+        height: 45px;
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+        padding: 10px;
+    }
+
+    .notification-message:nth-child(odd) {
+        background-color: #efefef;
+    }
+</style>
+
+<div class="notification-content">
+    <h2>Уведомления</h2>
+
+    {{#if notifications.length}}
+
+            {{#each notifications}}
+                <div class="notification-message">{{ this.message }}</div>
+            {{/each}}
+        </div>
+
+    {{else}}
+        <div>Список уведомлений пуст!</div>
+    {{/if}}
+</div>

@@ -11,6 +11,20 @@
 
     <title>REU Career</title>
   </head>
+  <style>
+      .notification-container {
+          position: relative;
+      }
+      .notification {
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          background-color: red;
+      }
+  </style>
   <body>
     {{#if isNotLogin}}
     <header class="header">
@@ -64,8 +78,11 @@
             <ul class="header-body-menu">
                 {{#if isAuth }}
                 <li class="header-body-menu-item">
-                    <a href="/notifications" class="header-bg elem">
+                    <a href="/notifications" class="header-bg elem notification-container">
                         <img src="/media/notification.svg" alt="icon: notification">
+                        {{#if isNotif}}
+                            <div class="notification"></div>
+                        {{/if}}
                     </a>
                 </li>
                 {{/if}}
@@ -79,11 +96,7 @@
                 {{#if isAuth }}
                 <li class="header-body-menu-item">
                     <a href="/user" class="header-bg avatar">
-                        {{#if user.avatar}}
-                        avatar
-                        {{else}}
-                        <img src="/media/avatar.png" alt="img: avatar">
-                        {{/if}}
+                        <img src="{{user.avatarURL}}" alt="img: avatar">
                     </a>
                 </li>
                 {{/if}}

@@ -39,15 +39,15 @@ app.engine(
 
 app.set('views', './views');
 app.set('view engine', 'handlebars');
-
-const csrfMiddleware = (req, res, next) => {
-    res.locals.csrf = req.csrfToken();
-    next();
-}
+//
+// const csrfMiddleware = (req, res, next) => {
+//     res.locals.csrf = req.csrfToken();
+//     next();
+// }
 
 app.use(express.urlencoded({ extended: true }));
-app.use(csrf());
-app.use(csrfMiddleware);
+// app.use(csrf());
+// app.use(csrfMiddleware);
 app.use(express.json());
 app.use(passport.initialize());
 app.use(passport.session());
@@ -66,6 +66,8 @@ const serverLog = (req, res, next) => {
     }
     next();
 }
+
+const notificationService = require('./services/notifications');
 
 app.use(serverLog);
 

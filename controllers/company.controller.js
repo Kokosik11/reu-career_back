@@ -1,7 +1,9 @@
 const Company = require('../models/Company.model');
 const User = require('../models/User.model');
+const Vacancy = require('../models/Vacancy.model');
 const Subscribe = require('../models/Subscribe.model')
 const subscribe = require('../services/subscribe')
+const notificationService = require("../services/notifications");
 
 const getAllFunc = () => {
     return Company.find({})
@@ -28,12 +30,16 @@ module.exports.create = (req, res, next) => {
 
     if(error) {
       User.findById(req.user._id)
-      .then(user => {
+      .then(async user => {
+          let isNotif = await notificationService.notification(req.user._id);
+
           return res.render('add-company', {
               isAuth: true,
               isNotLogin: true,
               user: user.toJSON(),
-              error: error.toJSON()
+              error: error.toJSON(),
+              isNotif
+
           });
       })
     }
@@ -65,11 +71,15 @@ module.exports.create = (req, res, next) => {
 
 module.exports.render = (req, res) => {
     User.findById(req.user._id)
-        .then(user => {
+        .then(async user => {
+            let isNotif = await notificationService.notification(req.user._id);
+
             return res.render('add-company', {
                 isAuth: true,
                 isNotLogin: true,
                 user: user.toJSON(),
+                isNotif
+
             });
         })
 }
@@ -79,17 +89,20 @@ module.exports.success = (req, res) => {
         .then(user => {
             if(!user) console.log("User not found")
             Company.findById(user.company)
-                .then(company => {
+                .then(async company => {
                     if(!company) return res.status(411).json({ "err": "Company is defined" })
                     if(company && company.isConfirmed) {
                         return res.send("Company page")
                     }
                     if(company && !company.isConfirmed) {
+                        let isNotif = await notificationService.notification(req.user._id);
                         return res.render('success-comp', {
                             isAuth: true,
                             isNotLogin: true,
                             user: user.toJSON(),
-                            company: company.toJSON()
+                            company: company.toJSON(),
+                            isNotif
+
                         })
                     }
                 })
@@ -114,15 +127,23 @@ module.exports.companies = (req, res) => {
 
 module.exports.getCompany = async (req, res) => {
     const companyId = req.params.id;
+
+    let vacancies = await Vacancy.find({ company: companyId });
+
+    console.log(vacancies);
+
     Company.findById(companyId)
         .then(async company => {
             if(req.isAuthenticated()) {
+                let isNotif = await notificationService.notification(req.user._id);
                 let options = { 
                     isAuth: true, 
                     isNotLogin: true, 
                     user: req.user.toJSON(),
                     company: company.toJSON(),
-                    isCreator: company._userId.equals(req.user._id)
+                    isCreator: company._userId.equals(req.user._id),
+                    vacancies,
+                    isNotif
                 }
 
                 options.status = await subscribe.isSubscribed(req.user._id, req.params.id)

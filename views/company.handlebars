@@ -17,7 +17,7 @@
         <span>{{ company.address }}</span>
         <span><a href="#">{{ company.email }}</a></span>
         <span>Вакансии</span>
-        <span><a href="#">0 активных вакансий</a></span>
+        <span><a href="#">{{vacancies.length}} активных вакансий</a></span>
         <span>Сферы деятельности</span>
         <p>
             Информационные 
@@ -26,6 +26,7 @@
         </p>
         {{#if isCreator }}
         <a href="" class="card-resume-button company-profile-button">Редактировать</a>
+        <a href="/vacancy/create" class="card-resume-button company-profile-button">Создать вакансию</a>
         {{else}}
         {{#if status.length }}
         <a href="/user/unsubscribe/{{ company._id }}" class="card-resume-button company-profile-button">Отписаться</a>

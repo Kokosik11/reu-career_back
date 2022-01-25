@@ -11,6 +11,8 @@ const Vacancy = new Schema({
     busyness: { type: String, required: true },
     createdAt: { type: Date, required: true, default: Date.now },
     company: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Company' },
+    logoURL: { type: String, default: '' },
+
 });
 
 module.exports = mongoose.model('Vacancy', Vacancy);

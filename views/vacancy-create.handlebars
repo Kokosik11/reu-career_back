@@ -1,0 +1,55 @@
+<link rel="stylesheet" href="/css/add-resume.css">
+<link rel="stylesheet" href="/css/add-form.css">
+
+<div class="content-header">
+    <h1>Создание резюме</h1>
+    <span>Чем больше заполнено резюме, тем выше шанс, что выберут именно вас!</span>
+</div>
+
+<div class="form-section">
+    <div class="tab">
+        <div class="tab-content active">
+            <span>1. Общие сведения</span>
+        </div>
+        <div class="tab-content">
+            <span>2. Описание компании</span>
+        </div>
+    </div>
+    <form action="/vacancy/create" method="post" class="tab-main">
+        <div class="tab-main_content active">
+            <div class="first-column">
+                <span class="span">Заголовок</span>
+                <input id="title" name="title" type="text" placeholder="Повар">
+                <span class="span">Зарплата</span>
+                <input id="salary" name="salary" type="text" placeholder="300р">
+                <span class="span">Адрес</span>
+                <input id="location" name="location" type="text" placeholder="Ул. Карла Маркса">
+                <button class="next"><span>Продолжить</span></button>
+            </div>
+            <div class="second-column">
+                <span class="span">Занятость</span>
+                <input type="text" id="busyness" name="busyness">
+            </div>
+        </div>
+        
+        <div class="tab-main_content">
+            <div class="first-column">
+                <span class="span">Описание компании *</span>
+                <textarea name="content" id="companyContent"></textarea>
+                <button type="submit" class="submit"><span>Отправить</span></button>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+<div class="content-header cta">
+    <h1>Найдите вашу работу мечты!</h1>
+    <button>
+        <a href="#">Смотреть вакансии</a>
+    </button>
+</div>
+
+<script src="/js/tab.js"></script>
+<script src="/tools/ckeditor/ckeditor.js"></script>
+<script src="/js/company.js"></script>

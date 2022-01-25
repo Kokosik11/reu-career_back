@@ -13,7 +13,7 @@ const handleGetData = () => {
                 cardWrapper.innerHTML += `<div class="card-resume">
                     <h3 class="card-resume-title">${item.careerObjective}</h3>
                     <div class="avatar-info">
-                        <img src="/media/avatar-resume.png" alt="img: avatar">
+                        <img src="${item.avatarURL}" alt="img: avatar">
                         <span>
                             ${item.firstname}
                             ${years} лет

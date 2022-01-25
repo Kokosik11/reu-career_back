@@ -16,11 +16,7 @@
             <div class="card-resume">
                 <h3 class="card-resume-title">{{this.careerObjective}}</h3>
                 <div class="avatar-info">
-                    {{#if this.avatar }}
-                    <img src="./media/avatar-resume.png" alt="img: avatar">
-                    {{else}}
-                    <img src="./media/avatar.png" alt="img: avatar">
-                    {{/if}}
+                    <img src="{{this.avatarURL}}" alt="img: avatar">
                     <span>
                         {{this.firstname}}
                         
@@ -28,7 +24,7 @@
                 </div>
                 <span class="card-resume-phone">{{this.phone}}</span>
                 <span class="card-resume-mail">{{this.email}}</span>
-                <a href="/resume/{{this._id}}/"<button class="card-resume-button">Посмотреть</button></a>
+                <a href="/resume/{{this._id}}/"><button class="card-resume-button">Посмотреть</button></a>
             </div>
             {{/if}}
         {{/each}}
