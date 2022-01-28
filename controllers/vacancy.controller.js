@@ -67,14 +67,19 @@ module.exports.createPage = (req, res) => {
 
 module.exports.getOne = async (req, res) => {
     try {
-        let user = await User.findOne({ _id: req.user._id });
         let vacancy = await Vacancy.findOne({ _id: req.params.id });
         let isNotif = await notificationService.notification(req.user._id);
-        let company = await Company.findOne({ _id: req.user.company });
+        let company = await Company.findOne({ _id: vacancy.company });
 
         if(!req.isAuthenticated()) {
-            return res.render('vacancy-page', { isNotLogin: true });
+            return res.render('vacancy-page', {
+                isNotLogin: true,
+                vacancy: vacancy.toJSON(),
+                company: company.toJSON(),
+            });
         }
+
+        let user = await User.findOne({ _id: req.user._id });
 
         return res.render('vacancy-page', {
             isAuth: true,
