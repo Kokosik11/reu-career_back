@@ -261,11 +261,14 @@ input[type=checkbox] {
     width: 240px;
     max-height: 245px;
     margin-bottom: 32px;
+    text-decoration: none;
 }
 
-.card img {
+.card > img {
     max-width: 194px;
     max-height: 90px;
+    margin-top: 10px;
+    margin-bottom: 21px;
 }
 
 .card h2 {
@@ -297,11 +300,6 @@ input[type=checkbox] {
 
 .price-location span {
     margin-left: 6px;
-}
-
-#company {
-    margin-top: 10px;
-    margin-bottom: 67px;
 }
 
 .card-bottom {

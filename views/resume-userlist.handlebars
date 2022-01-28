@@ -1,0 +1,30 @@
+<link rel="stylesheet" href="/css/add-form.css">
+<link rel="stylesheet" href="/css/profile.css">
+
+<div class="content-header">
+    <h1>Выберите резюме</h1>
+    <span>Найдите подходящее вам резюме для отправки работодателю</span>
+</div>
+
+<div class="resumes" style="max-width: 1300px;">
+    <div class="cards-container">
+
+        {{#if resumes.length}}
+            {{#each resumes}}
+                <div class="card-resume">
+                    <h3 class="card-resume-title">{{this.careerObjective}}</h3>
+                    <div class="avatar-info">
+                        <img src="{{this.avatarURL}}" alt="img: avatar">
+                        <span>
+                            {{this.firstname}}
+
+                        </span>
+                    </div>
+                    <span class="card-resume-phone">{{this.phone}}</span>
+                    <span class="card-resume-mail">{{this.email}}</span>
+                    <a href="./{{this._id}}/select"><button class="card-resume-button">Выбрать</button></a>
+                </div>
+            {{/each}}
+        {{/if}}
+    </div>
+</div>

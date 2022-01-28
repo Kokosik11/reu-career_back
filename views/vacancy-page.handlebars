@@ -14,30 +14,26 @@
     <div class="company-profile-container">
         <aside>
             <img src="{{ company.logoURL }}" alt="">
-            <span>{{ company.address }}</span>
+            <span>{{ vacancy.location }}</span>
             <span><a href="#">{{ company.email }}</a></span>
-            <span>Вакансии</span>
-            <span><a href="#">{{vacancies.length}} активных вакансий</a></span>
-            <span>Сферы деятельности</span>
-            <p>
-                Информационные
-                технологии, системная
-                интеграция, интернет
-            </p>
+            <span>Занятость</span>
+            <span><a>{{vacancy.busyness}}</a></span>
+            <span>Зарплатные ожидания</span>
+            <span><a>{{vacancy.salary}} бел. руб. </a></span>
             {{#if isCreator }}
-                <a href="/company/update" class="card-resume-button company-profile-button">Редактировать</a>
-                <a href="/vacancy/add" class="card-resume-button company-profile-button">Создать вакансию</a>
+                <a href="/vacancy/update" class="card-resume-button company-profile-button">Редактировать</a>
+                <a href="/vacancy/${id}/remove" class="card-resume-button company-profile-button">Удалить вакансию</a>
             {{else}}
                 {{#if status.length }}
-                    <a href="/user/unsubscribe/{{ company._id }}" class="card-resume-button company-profile-button">Отписаться</a>
+                    <a class="card-resume-button company-profile-button">С вами свяжутся!</a>
                 {{else}}
-                    <a href="/user/subscribe/{{ company._id }}" class="card-resume-button company-profile-button">Подписаться</a>
+                    <a href="/user/{{ company._id }}/respond" class="card-resume-button company-profile-button">Откликнуться</a>
                 {{/if}}
             {{/if}}
         </aside>
         <div class="company-block">
             <div class="company-title">
-                <h2>{{ company.name }}</h2>
+                <h2>{{ vacancy.title }}</h2>
                 <img src="./media/galochka.svg" alt="">
             </div>
             <p>

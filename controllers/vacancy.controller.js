@@ -17,31 +17,34 @@ module.exports.getAll = (req, res, next) => {
 }
 
 module.exports.create = async (req, res, next) => {
-    if(!req.body.title) return res.status(411).json({ "err": "Title is required" })
-    if(!req.body.content) return res.status(411).json({ "err": "Content is required" })
-    if(!req.body.salary) return res.status(411).json({ "err": "Salary is required" })
-    if(!req.body.location) return res.status(411).json({ "err": "Location is required" })
-    if(!req.body.busyness) return res.status(411).json({ "err": "Busyness is required" })
+    try {
+        if(!req.body.title) return res.status(411).json({ "err": "Title is required" })
+        if(!req.body.content) return res.status(411).json({ "err": "Content is required" })
+        if(!req.body.salary) return res.status(411).json({ "err": "Salary is required" })
+        if(!req.body.location) return res.status(411).json({ "err": "Location is required" })
+        if(!req.body.busyness) return res.status(411).json({ "err": "Busyness is required" })
 
-    let company = await Company.findOne({ _id: req.user.company });
+        let company = await Company.findOne({ _id: req.user.company });
 
-    let vacancy = new Vacancy({
-        title: req.body.title,
-        content: req.body.content,
-        salary: req.body.salary,
-        location: req.body.location,
-        busyness: req.body.busyness,
-        company: req.user.company,
-        logoURL: company.logoURL,
+        let vacancy = new Vacancy({
+            title: req.body.title,
+            content: req.body.content,
+            salary: req.body.salary,
+            location: req.body.location,
+            busyness: req.body.busyness,
+            company: req.user.company,
+            logoURL: company.logoURL,
 
-    })
+        })
 
-    vacancy.save((err, vacancy) => {
-        if(err) return res.status(411).json({ "err": err });
-        res.status(200).json({ "message": vacancy });
-    })
+        vacancy.save();
 
-    return res.redirect("/company/me")
+        return res.redirect("/company/me")
+    } catch (e) {
+        console.log(e);
+        res.status(501).json({ message: "Server error" })
+    }
+
 }
 
 module.exports.createPage = (req, res) => {
@@ -50,7 +53,7 @@ module.exports.createPage = (req, res) => {
             if(!user) console.log("User not found")
             Company.findById(user.company)
                 .then(async company => {
-                    if(!company) return res.status(411).json({ "err": "Company is defined" })
+                    if(!company) return res.redirect('/');
                     if(company && company.isConfirmed) {
                         let isNotif = await notificationService.notification(req.user._id);
                         return res.render('vacancy-create', {
@@ -68,7 +71,6 @@ module.exports.createPage = (req, res) => {
 module.exports.getOne = async (req, res) => {
     try {
         let vacancy = await Vacancy.findOne({ _id: req.params.id });
-        let isNotif = await notificationService.notification(req.user._id);
         let company = await Company.findOne({ _id: vacancy.company });
 
         if(!req.isAuthenticated()) {
@@ -80,6 +82,7 @@ module.exports.getOne = async (req, res) => {
         }
 
         let user = await User.findOne({ _id: req.user._id });
+        let isNotif = await notificationService.notification(req.user._id);
 
         return res.render('vacancy-page', {
             isAuth: true,
@@ -87,6 +90,7 @@ module.exports.getOne = async (req, res) => {
             user: user.toJSON(),
             vacancy: vacancy.toJSON(),
             company: company.toJSON(),
+            isCreator: company._userId.equals(req.user._id),
             isNotif
         })
 

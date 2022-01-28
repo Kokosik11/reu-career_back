@@ -1,4 +1,5 @@
 const User = require('../models/User.model');
+const Resume = require('../models/Resume.model');
 const subscribe = require('../services/subscribe');
 
 const mongoose = require('mongoose');
@@ -55,4 +56,25 @@ module.exports.unsubscribe = (req, res) => {
             return res.redirect('/company/'+req.params.id);
         } 
     });
-} 
+}
+
+module.exports.respond = async (req, res) => {
+    try {
+        let resumes = await Resume.find({ _userId: req.user._id, isPublished: { $eq: true } }).lean();
+        let isNotif = await notificationService.notification(req.user._id);
+
+        console.log(resumes)
+
+        return res.render('resume-userlist', {
+            isAuth: true,
+            isNotLogin: true,
+            user: req.user.toJSON(),
+            resumes: resumes,
+            isNotif,
+        })
+
+    } catch (e) {
+        console.log(e);
+        return res.status(501).json({ message: "Server error" })
+    }
+}

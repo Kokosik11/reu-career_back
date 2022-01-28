@@ -51,7 +51,8 @@
     margin-bottom: 20px;
 }
 
-.form-section .tab-main_content input {
+.form-section .tab-main_content input,
+.form-section .tab-main_content select {
     padding-left: 22px;
     padding-right: 150px;
     padding-top: 16px;

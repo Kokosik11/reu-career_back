@@ -9,11 +9,17 @@ const handleGetData = () => {
       console.log(data)
       
       data.forEach(item => {
+          let createdAt = new Date(item.createdAt);
+          let date = Math.trunc((Date.now() - createdAt) / 1000 / 60 / 60 / 24 );
+          let text = `${date} дня(-ей) назад`;
+          if(date === 0) {
+            text = "Опубликовано недавно";
+          }
           cardWrapper.innerHTML += `<a href="/vacancy/${ item._id }" class="card">
                                       <h2>${ item.title }</h2>
                                       <div class="price-location">
                                           <img src="./media/swap.svg" alt="">
-                                          <span>${ item.salary }</span>
+                                          <span>${ item.salary }р.</span>
                                           <img src="./media/location.svg" id="location" alt="">
                                           <span>${ item.location }</span>
                                       </div>
@@ -22,7 +28,7 @@ const handleGetData = () => {
                                           <div class="button-work-time">
                                               ${ item.busyness }
                                           </div>
-                                          <span class="public-time">38 минут назад</span>
+                                          <span class="public-time">${text}</span>
                                       </div>
                                   </a>`
       })

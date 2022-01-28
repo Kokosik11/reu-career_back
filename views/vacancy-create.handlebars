@@ -12,7 +12,7 @@
             <span>1. Общие сведения</span>
         </div>
         <div class="tab-content">
-            <span>2. Описание компании</span>
+            <span>2. Описание вакансии</span>
         </div>
     </div>
     <form action="/vacancy/create" method="post" class="tab-main">
@@ -23,18 +23,25 @@
                 <span class="span">Зарплата</span>
                 <input id="salary" name="salary" type="text" placeholder="300р">
                 <span class="span">Адрес</span>
-                <input id="location" name="location" type="text" placeholder="Ул. Карла Маркса">
+                <input name="location" type="text" placeholder="Ул. Карла Маркса">
                 <button class="next"><span>Продолжить</span></button>
             </div>
             <div class="second-column">
                 <span class="span">Занятость</span>
-                <input type="text" id="busyness" name="busyness">
+<!--                <input type="text" id="busyness" name="busyness">-->
+                <select name="busyness">
+                    <option value="Полная занятость">Полная занятость</option>
+                    <option value="Частичная занятость">Частичная занятость</option>
+                    <option value="Проектная работа/разовое задание">Проектная работа/разовое задание</option>
+                    <option value="Волонтерство">Волонтерство</option>
+                    <option value="Стажировка">Стажировка</option>
+                </select>
             </div>
         </div>
         
         <div class="tab-main_content">
             <div class="first-column">
-                <span class="span">Описание компании *</span>
+                <span class="span">Описание вакансии *</span>
                 <textarea name="content" id="companyContent"></textarea>
                 <button type="submit" class="submit"><span>Отправить</span></button>
             </div>
