@@ -15,7 +15,7 @@ module.exports.render = async (req, res) => {
             isAuth: true,
             isNotLogin: true,
             user: user.toJSON(),
-            notifications: company.toJSON().notifications
+            notifications: company.toJSON().notifications.reverse()
         });
     } catch (e) {
         console.log(e);

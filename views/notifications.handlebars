@@ -14,11 +14,14 @@
         align-items: center;
         box-sizing: border-box;
         padding: 10px;
+        justify-content: space-between;
     }
 
     .notification-message:nth-child(odd) {
         background-color: #efefef;
     }
+
+
 </style>
 
 <div class="notification-content">
@@ -27,7 +30,7 @@
     {{#if notifications.length}}
 
             {{#each notifications}}
-                <div class="notification-message">{{ this.message }}</div>
+                <div class="notification-message"><div>{{{ this.message }}}</div><div class="time">{{formatDate this.date "short" }}</div></div>
             {{/each}}
         </div>
 

@@ -4,10 +4,12 @@ const passport = require('passport');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const handlebars = require('express-handlebars');
+const Handlebars = require('handlebars')
 const csrf = require('csurf')
 const path = require('path');
 const chalk = require('chalk');
 const env = require('dotenv');
+const moment = require('moment')
 
 require('./config/db');
 
@@ -15,6 +17,21 @@ const app = express();
 
 require("./authenticate")
 
+const DateFormats = {
+    short: "DD MMMM - YYYY",
+    long: "dddd DD.MM.YYYY HH:mm"
+};
+// Use UI.registerHelper..
+Handlebars.registerHelper("formatDate", function(datetime, format) {
+    if (moment) {
+    // can use other formats like 'lll' too
+        format = DateFormats[format] || format;
+        return moment(datetime).locale('ru').format(format);
+    }
+    else {
+        return datetime;
+    }
+});
 
 const isProduction = process.env.MODE === "production";
 

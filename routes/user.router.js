@@ -17,8 +17,8 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-Router.get('/:id/:resumeId/select', auth, Controller.respond);
-Router.get('/:id/respond', auth, Controller.respond);
+Router.get('/:vacancyId/:resumeId/select', auth, Controller.respond);
+Router.get('/:id/respond', auth, Controller.userResumes);
 Router.get('/unsubscribe/:id', auth, Controller.unsubscribe);
 Router.get('/subscribe/:id', auth, Controller.subscribeToCompany);
 Router.post('/update', auth, upload.single("avatar"), Controller.updateProfile);
