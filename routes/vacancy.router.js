@@ -8,6 +8,7 @@ const company = require("./middleware/company");
 
 Router.post('/create', auth, Controller.create);
 Router.get('/add', auth, Controller.createPage);
-Router.get('/', Controller.getAll)
+Router.get('/:id', Controller.getOne);
+Router.get('/', Controller.getAll);
 
 module.exports = Router;

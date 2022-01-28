@@ -1,0 +1,74 @@
+<link rel="stylesheet" href="/css/add-form.css">
+
+    <div class="content-header">
+        <h1>Регистрация компании</h1>
+    </div>
+
+    <div class="form-section">
+        {{#if error}}
+        <div class="error-handler">
+          {{error}}
+        </div>
+        {{/if}}
+        <div class="tab">
+            <div class="tab-content active">
+                <span>1. Основные данные</span>
+            </div>
+            <div class="tab-content">
+                <span>2. Доп. данные</span>
+            </div>
+            <div class="tab-content">
+                <span>3. Загрузите фото</span>
+            </div>
+        </div>
+        <form action="/company/update" method="post" class="tab-main" enctype="multipart/form-data">
+            <div class="tab-main_content active">
+                <div class="first-column">
+                    <div class="error-handler">Заполните все формы с *</div>
+                    <br><span class="span">Название компании *</span>
+                    <input type="text" id="name" name="name" placeholder="ООО Epam Systems" value="{{company.name}}">
+                    <span class="span">Адрес компании *</span>
+                    <input type="text" id="companyAddress" name="address" placeholder="Ул. Маяка 34-65" value="{{company.address}}">
+                    <span class="span">Email компании*</span>
+                    <input type="text" id="companyEmail" name="email" placeholder="example@gmail.com" value="{{company.email}}">
+                    <button type="button" class="next"><span>Продолжить</span></button>
+                </div>
+                <div class="second-column">
+                    <span class="span">Телефон компании *</span>
+                    <input type="text" id="companyPhone" name="phone" placeholder="+375 29 765 48 56" value="{{company.phone}}">
+                    <span class="span">Доп. телефон</span>
+                    <input type="text" id="companyAddphone" name="addPhone" placeholder="+375 29 765 48 56" value="{{company.addPhone}}">
+                </div>
+            </div>
+
+            <div class="tab-main_content">
+                <div class="first-column">
+                    <span class="span">Описание компании *</span>
+                    <textarea name="content" id="companyContent">{{company.content}}</textarea>
+                    <br><button type="button" class="next"><span>Продолжить</span></button>
+                </div>
+            </div>
+
+            <input type="hidden" name="_csrf" value="{{csrf}}">
+            <div class="tab-main_content">
+                <div class="first-column">
+                    <span class="span">Логотип компании *</span>
+                    <input type="file" name="company-logo" id="companyLogo" accept=".jpg, .jpeg, .png">
+                    <button type="submit" class="submit"><span>Отправить</span></button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="content-header cta">
+        <h1>Найдите подходящих работников!</h1>
+        <button>
+            <a href="#">Найти сотрудников</a>
+        </button>
+    </div>
+
+<script src="/js/tab.js"></script>
+
+<script src="/tools/ckeditor/ckeditor.js"></script>
+
+<script src="/js/company.js"></script>

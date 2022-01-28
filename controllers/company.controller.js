@@ -130,10 +130,9 @@ module.exports.getCompany = async (req, res) => {
 
     let vacancies = await Vacancy.find({ company: companyId });
 
-    console.log(vacancies);
-
     Company.findById(companyId)
         .then(async company => {
+            if(!company) return res.status(404).json({ message: "Company not found"})
             if(req.isAuthenticated()) {
                 let isNotif = await notificationService.notification(req.user._id);
                 let options = { 
@@ -156,12 +155,9 @@ module.exports.getCompany = async (req, res) => {
                 company: company.toJSON(),
             });
         })
-
         .catch(err => {
-            if (err) {
-                console.log(err);
-                return res.sendStatus(400);
-            }
+            console.log(err);
+            return res.status(501).json("Error");
         })
 }
 
@@ -173,4 +169,59 @@ module.exports.getMyCompany = (req, res) => {
                 res.redirect('/company/'+company._id);            
             })
     }) 
+}
+
+module.exports.update = async (req, res) => {
+    let error = null;
+
+    if(error) {
+        User.findById(req.user._id)
+            .then(async user => {
+                let isNotif = await notificationService.notification(req.user._id);
+
+                return res.render('add-company', {
+                    isAuth: true,
+                    isNotLogin: true,
+                    user: user.toJSON(),
+                    error: error.toJSON(),
+                    isNotif
+
+                });
+            })
+    }
+
+    let companyData = {}
+
+    if(req.body.name) companyData.name = req.body.name;
+    if(req.body.content) companyData.content = req.body.content;
+    if(req.file) companyData.logoURL = req.file.path.replace("static", "");
+    if(req.body.address) companyData.address = req.body.address;
+    if(req.body.email) companyData.email = req.body.email;
+    if(req.body.phone) companyData.phone = req.body.phone;
+    if(req.body.addPhone) companyData.addPhone = req.body.addPhone;
+
+    let company = await Company.findOneAndUpdate(
+            { _userId: req.user._id },
+        { $set: companyData },
+        { now: true },
+        )
+
+    res.redirect('/company/me')
+}
+
+module.exports.updateGET = (req, res) => {
+    User.findById(req.user._id)
+        .then(async user => {
+            let isNotif = await notificationService.notification(req.user._id);
+            let company = await Company.findOne({ _userId: req.user._id });
+
+            return res.render('company-edit', {
+                isAuth: true,
+                isNotLogin: true,
+                user: user.toJSON(),
+                company: company.toJSON(),
+                isNotif
+
+            });
+        })
 }

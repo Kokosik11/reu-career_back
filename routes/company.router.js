@@ -20,6 +20,8 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
+Router.post('/update', upload.single("company-logo"), auth, Controller.update);
+Router.get('/update', auth, Controller.updateGET);
 Router.get('/success', auth, Controller.success);
 Router.post('/create', upload.single("company-logo"), auth, Controller.create);
 Router.get('/create', auth, company.isYourCompany, Controller.render);

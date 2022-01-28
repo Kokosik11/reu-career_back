@@ -263,6 +263,11 @@ input[type=checkbox] {
     margin-bottom: 32px;
 }
 
+.card img {
+    max-width: 194px;
+    max-height: 90px;
+}
+
 .card h2 {
     font-weight: bold;
     font-size: 20px;

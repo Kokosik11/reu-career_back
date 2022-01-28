@@ -16,20 +16,23 @@ module.exports.getAll = (req, res, next) => {
     })
 }
 
-module.exports.create = (req, res, next) => {
+module.exports.create = async (req, res, next) => {
     if(!req.body.title) return res.status(411).json({ "err": "Title is required" })
     if(!req.body.content) return res.status(411).json({ "err": "Content is required" })
     if(!req.body.salary) return res.status(411).json({ "err": "Salary is required" })
     if(!req.body.location) return res.status(411).json({ "err": "Location is required" })
     if(!req.body.busyness) return res.status(411).json({ "err": "Busyness is required" })
-    
+
+    let company = await Company.findOne({ _id: req.user.company });
+
     let vacancy = new Vacancy({
         title: req.body.title,
         content: req.body.content,
         salary: req.body.salary,
         location: req.body.location,
         busyness: req.body.busyness,
-        company: req.user.company
+        company: req.user.company,
+        logoURL: company.logoURL,
 
     })
 
@@ -56,9 +59,34 @@ module.exports.createPage = (req, res) => {
                             user: user.toJSON(),
                             company: company.toJSON(),
                             isNotif
-
                         })
                     }
                 })
         })
+}
+
+module.exports.getOne = async (req, res) => {
+    try {
+        let user = await User.findOne({ _id: req.user._id });
+        let vacancy = await Vacancy.findOne({ _id: req.params.id });
+        let isNotif = await notificationService.notification(req.user._id);
+        let company = await Company.findOne({ _id: req.user.company });
+
+        if(!req.isAuthenticated()) {
+            return res.render('vacancy-page', { isNotLogin: true });
+        }
+
+        return res.render('vacancy-page', {
+            isAuth: true,
+            isNotLogin: true,
+            user: user.toJSON(),
+            vacancy: vacancy.toJSON(),
+            company: company.toJSON(),
+            isNotif
+        })
+
+    } catch (e) {
+        console.log(e);
+        res.status(501).json({ message: "Server error"})
+    }
 }

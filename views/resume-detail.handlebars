@@ -13,7 +13,7 @@
     <aside>
         <img src="{{resume.avatarURL}}" alt="" style="height: 110px; width: 110px;">
         <span>{{ resume.firstname }} {{ resume.lastname }}</span>
-        <span><a href="#">19 лет, 28.08.2001</a></span>
+        <span class="birthday">{{ resume.birthdate }}</span>
         <span>Контакты</span>
         <span><a href="#" style="margin-bottom: 0px;">{{ resume.phone }}</a></span>
         <span><a href="#" style="margin-bottom: 0px;">{{ resume.email }}</a></span>
@@ -91,3 +91,6 @@
         <span class="muted">Дата публикации резюме: 18 ноября 2021</span>
     </div>
 </div>
+
+<script src="/js/format.js"></script>
+

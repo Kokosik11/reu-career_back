@@ -25,8 +25,8 @@
             интеграция, интернет                
         </p>
         {{#if isCreator }}
-        <a href="" class="card-resume-button company-profile-button">Редактировать</a>
-        <a href="/vacancy/create" class="card-resume-button company-profile-button">Создать вакансию</a>
+        <a href="/company/update" class="card-resume-button company-profile-button">Редактировать</a>
+        <a href="/vacancy/add" class="card-resume-button company-profile-button">Создать вакансию</a>
         {{else}}
         {{#if status.length }}
         <a href="/user/unsubscribe/{{ company._id }}" class="card-resume-button company-profile-button">Отписаться</a>
