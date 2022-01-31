@@ -206,7 +206,7 @@ module.exports.update = async (req, res) => {
         { now: true },
         )
 
-    res.redirect('/company/me')
+    return res.redirect('/company/me')
 }
 
 module.exports.updateGET = (req, res) => {

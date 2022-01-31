@@ -21,8 +21,10 @@
             <span>Зарплатные ожидания</span>
             <span><a>{{vacancy.salary}} бел. руб. </a></span>
             {{#if isCreator }}
-                <a href="/vacancy/update" class="card-resume-button company-profile-button">Редактировать</a>
-                <a href="/vacancy/${id}/remove" class="card-resume-button company-profile-button">Удалить вакансию</a>
+                <a href="/vacancy/{{vacancy._id}}/update" class="card-resume-button company-profile-button">Редактировать</a>
+                <form action="/vacancy/{{vacancy._id}}/remove" method="post">
+                    <button class="card-resume-button company-profile-button">Удалить вакансию</button>
+                </form>
             {{else}}
                 {{#if status.length }}
                     <a class="card-resume-button company-profile-button">С вами свяжутся!</a>

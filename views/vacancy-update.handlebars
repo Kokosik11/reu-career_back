@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="/css/add-form.css">
 
 <div class="content-header">
-    <h1>Создание вакансии</h1>
+    <h1>Редактирование вакансии</h1>
 </div>
 
 <div class="form-section">
@@ -14,21 +14,23 @@
             <span>2. Описание вакансии</span>
         </div>
     </div>
-    <form action="/vacancy/create" method="post" class="tab-main">
+    <form action="/vacancy/{{ vacancy._id }}/update" method="post" class="tab-main">
         <div class="tab-main_content active">
             <div class="first-column">
+                <input type="hidden" name="_id" value="{{ vacancy._id }}">
                 <span class="span">Заголовок</span>
-                <input id="title" name="title" type="text" placeholder="Повар">
+                <input id="title" name="title" type="text" placeholder="Повар" value="{{ vacancy.title }}">
                 <span class="span">Зарплата</span>
-                <input id="salary" name="salary" type="text" placeholder="300р">
+                <input id="salary" name="salary" type="text" placeholder="300р" value="{{ vacancy.salary}}">
                 <span class="span">Адрес</span>
-                <input name="location" type="text" placeholder="Ул. Карла Маркса">
+                <input name="location" type="text" placeholder="Ул. Карла Маркса" value="{{ vacancy.location }}">
                 <button class="next"><span>Продолжить</span></button>
             </div>
             <div class="second-column">
                 <span class="span">Занятость</span>
 <!--                <input type="text" id="busyness" name="busyness">-->
                 <select name="busyness">
+                    <option value="{{ vacancy.busyness }}" selected>{{ vacancy.busyness }}</option>
                     <option value="Полная занятость">Полная занятость</option>
                     <option value="Частичная занятость">Частичная занятость</option>
                     <option value="Проектная работа/разовое задание">Проектная работа/разовое задание</option>
@@ -41,7 +43,7 @@
         <div class="tab-main_content">
             <div class="first-column">
                 <span class="span">Описание вакансии *</span>
-                <textarea name="content" id="companyContent"></textarea>
+                <textarea name="content" id="companyContent">{{ vacancy.content }}</textarea>
                 <button type="submit" class="submit"><span>Отправить</span></button>
             </div>
         </div>

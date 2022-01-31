@@ -34,7 +34,6 @@ module.exports.create = async (req, res, next) => {
             busyness: req.body.busyness,
             company: req.user.company,
             logoURL: company.logoURL,
-
         })
 
         vacancy.save();
@@ -96,6 +95,66 @@ module.exports.getOne = async (req, res) => {
 
     } catch (e) {
         console.log(e);
-        res.status(501).json({ message: "Server error"})
+        return res.status(501).json({ message: "Server error"})
+    }
+}
+
+module.exports.updateGET = async (req, res) => {
+    try {
+        let vacancy = await Vacancy.findOne({ _id: req.params.id });
+        let isNotif = await notificationService.notification(req.user._id);
+
+        if(vacancy && req.isAuthenticated) {
+            return res.render('vacancy-update', {
+                isAuth: true,
+                isNotLogin: true,
+                user: req.user.toJSON(),
+                vacancy: vacancy.toJSON(),
+                isNotif,
+            })
+        }
+
+        return res.redirect('/vacancy/' + vacancy._id);
+    } catch (e) {
+        console.log(e);
+        return res.status(501).json({ message: "Server error" })
+    }
+}
+
+module.exports.update = async (req, res) => {
+    try {
+        let vacancyUpd = {};
+
+        if(req.body.title) vacancyUpd.title = req.body.title;
+        if(req.body.salary) vacancyUpd.salary = req.body.salary;
+        if(req.body.location) vacancyUpd.location = req.body.location;
+        if(req.body.busyness) vacancyUpd.busyness = req.body.busyness;
+        if(req.body.content) vacancyUpd.content = req.body.content;
+
+        let vacancy = await Vacancy.findOneAndUpdate(
+            { _id: req.body._id },
+            { $set: vacancyUpd },
+            { now: true },
+        )
+
+        console.log(vacancy);
+
+        return res.redirect('/vacancy/' + req.body._id);
+    } catch (e) {
+        console.log(e);
+        return res.status(501).json({ message: "Server error" })
+    }
+}
+
+
+module.exports.remove = async (req, res) => {
+    try {
+        console.log(req.params.id)
+        let vacancy = await Vacancy.findOneAndDelete({ _id: req.params.id })
+
+        return res.redirect('/');
+    } catch (e) {
+        console.log(e);
+        return res.status(501).json({ message: "Server error" })
     }
 }

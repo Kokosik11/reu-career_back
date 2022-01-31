@@ -30,7 +30,7 @@
     {{#if notifications.length}}
 
             {{#each notifications}}
-                <div class="notification-message"><div>{{{ this.message }}}</div><div class="time">{{formatDate this.date "short" }}</div></div>
+                <div class="notification-message"><div>{{{ this.message }}}</div><div class="time">{{formatDate this.date "long" }}</div></div>
             {{/each}}
         </div>
 

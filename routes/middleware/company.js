@@ -1,4 +1,5 @@
 const Company = require('../../models/Company.model');
+const Vacancy = require('../../models/Vacancy.model');
 
 const company = (req, res, next) => {
     Company.findById(req.params.id)
@@ -19,4 +20,20 @@ const isYourCompany = (req, res, next) => {
     })
 }
 
-module.exports = { company, isYourCompany };
+const isYourVacancy = async (req, res, next) => {
+    try {
+        let vacancy = await Vacancy.findOne({ _id: req.params.id, company: req.user.company });
+        console.log(vacancy)
+
+        if(vacancy) {
+            return next();
+        }
+
+        return res.redirect('/vacancy/' + req.params.id);
+    } catch (e) {
+        console.log(e);
+        return res.status(501).json({ message: "Server error" });
+    }
+}
+
+module.exports = { company, isYourCompany, isYourVacancy };

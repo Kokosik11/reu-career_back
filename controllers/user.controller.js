@@ -6,6 +6,8 @@ const mongoose = require('mongoose');
 const notificationService = require("../services/notifications");
 const Vacancy = require('../models/Vacancy.model');
 const Company = require('../models/Company.model');
+const nodemailer = require("nodemailer");
+const config = require("config");
 
 module.exports.profile = (req, res, next) => {
     User.findById(req.user._id)
@@ -97,6 +99,16 @@ module.exports.respond = async (req, res) => {
             let message = `<a href="/resume/${resume._id}">${resume.firstname}</a> откликнулся на <a href="/vacancy/${vacancy._id}">вашу вакансию</a>`
             
             company.notifications.push({ message });
+
+            let transporter = nodemailer.createTransport({ service: 'Gmail', auth: { user: config.email.USERNAME, pass: config.email.PASSWORD } });
+            let mailOptions = { from: 'reu-career@gmail.com', to: company.email, subject: 'REU Career | Уведомление',
+                html: '<div>Привет, '+ resume.firstname +'!</div><br>' + `<div>На вашу вакансию <a href="reu-career.herokuapp.com/vacancy/${vacancy._id}">${vacancy.title}</a> подписался \n` + `<a href="reu-career.herokuapp.com/resume/${resume._id}">${resume.firstname}</a></div><br><br>` + '<div>С уважением, <a href="reu-career.herokuapp.com">REU Career</a></div><br>   ' };
+            transporter.sendMail(mailOptions, function (err) {
+                if (err) {
+                    console.log(err);
+                    return res.status(500).json({ message:'Technical Issue!, Please click on resend for verify your Email.' });
+                }
+            })
 
             company.save();
 

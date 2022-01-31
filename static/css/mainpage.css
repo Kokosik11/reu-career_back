@@ -266,7 +266,8 @@ input[type=checkbox] {
 
 .card > img {
     max-width: 194px;
-    max-height: 90px;
+    min-height: 70px;
+    max-height: 110px;
     margin-top: 10px;
     margin-bottom: 21px;
 }

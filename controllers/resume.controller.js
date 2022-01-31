@@ -130,15 +130,22 @@ module.exports.all = (req, res) => {
     Resume.find({})
         .lean()
         .then(async resumes => {
-            let isNotif = await notificationService.notification(req.user._id);
+            if(!req.isAuthenticated()) {
+                return res.render('resume-list', {
+                    isNotLogin: true,
+                    resumes: resumes
+                });
+            } else {
+                let isNotif = await notificationService.notification(req.user._id);
 
-            res.render('resume-list', {
-                isAuth: req.user && true, 
-                isNotLogin: true, 
-                user: req.user.toJSON(),
-                resumes: resumes,
-                isNotif
-            })
+                res.render('resume-list', {
+                    isAuth: req.user && true,
+                    isNotLogin: true,
+                    user: req.user.toJSON(),
+                    resumes: resumes,
+                    isNotif
+                })
+            }
         })
 }
 
